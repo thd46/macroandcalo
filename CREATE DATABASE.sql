@@ -19,3 +19,23 @@ CREATE TABLE DIET (
     calories DECIMAL(5,2) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES USER(id)
 );
+
+CREATE TABLE Exercise (
+	exercise_id	INTEGER NOT NULL, 	-- primary key
+	name		VARCHAR(30),		-- name of exercise
+	sets		INTEGER,		-- number of sets
+	reps		INTEGER,		-- number of reps
+	muscle_group	VARCHAR(40),		-- targeted muscle group(s)
+	type		VARCHAR(20)		-- ie. cardio, weightlifting, aerobics, etc
+	PRIMARY KEY (exercise_id)
+);
+
+CREATE TABLE ExercisePlan (
+	plan_id		INTEGER NOT NULL,	-- primary key of the plan
+	user_id		INTEGER NOT NULL,	-- foreign key
+	exercise_id	INTEGER NOT NULL,	-- foreign key
+	time_frame	DATE,			-- date of the end of the plan
+	PRIMARY KEY (plan_id),
+	FOREIGN KEY (user_id) REFERENCES User (user_id),
+	FOREIGN KEY (exercise_id) REFERENCES Exercise (exercise_id)
+);
