@@ -12,25 +12,13 @@ CREATE TABLE User (
     PRIMARY KEY (user_id)
 );
 
-CREATE TABLE Diet (
-    diet_id INTEGER NOT NULL AUTO_INCREMENT,
-    user_id INTEGER NOT NULL,
-    date DATE NOT NULL,
-    meal_type ENUM('breakfast', 'lunch', 'dinner', 'snack') NOT NULL,
-    food_id INTEGER NOT NULL,
-    calories DECIMAL(5,2) NOT NULL,
-    PRIMARY KEY (diet_id),
-    FOREIGN KEY (user_id) REFERENCES User (user_id),
-    FOREIGN KEY (food_id) REFERENCES FoodItem (food_id)
-);
-
 CREATE TABLE Exercise (
 	exercise_id	INTEGER NOT NULL AUTO_INCREMENT, 	-- primary key
 	name		VARCHAR(30),				-- name of exercise
 	sets		INTEGER,				-- number of sets
 	reps		INTEGER,				-- number of reps
 	muscle_group	VARCHAR(40),				-- targeted muscle group(s)
-	type		VARCHAR(20)				-- ie. cardio, weightlifting, aerobics, etc
+	type		VARCHAR(20),				-- ie. cardio, weightlifting, aerobics, etc
 	PRIMARY KEY (exercise_id)
 );
 
@@ -44,7 +32,6 @@ CREATE TABLE ExercisePlan (
 	FOREIGN KEY (exercise_id) REFERENCES Exercise (exercise_id)
 );
 
-
 CREATE TABLE FoodItem (
     food_id INTEGER NOT NULL AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
@@ -55,4 +42,16 @@ CREATE TABLE FoodItem (
     added_sugar DECIMAL(5,2),
     servings INTEGER,
     PRIMARY KEY (food_id)
+);
+
+CREATE TABLE Diet (
+    diet_id INTEGER NOT NULL AUTO_INCREMENT,
+    user_id INTEGER NOT NULL,
+    date DATE NOT NULL,
+    meal_type ENUM('breakfast', 'lunch', 'dinner', 'snack') NOT NULL,
+    food_id INTEGER NOT NULL,
+    calories DECIMAL(5,2) NOT NULL,
+    PRIMARY KEY (diet_id),
+    FOREIGN KEY (user_id) REFERENCES User (user_id),
+    FOREIGN KEY (food_id) REFERENCES FoodItem (food_id)
 );
