@@ -1,5 +1,6 @@
 -- Create the database, if it does not already exist
 CREATE DATABASE FitnessTracker;
+USE FitnessTracker;
 
 -- Create the tables
 CREATE TABLE User (
