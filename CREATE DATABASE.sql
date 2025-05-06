@@ -1,16 +1,15 @@
-CREATE DATABASE USERS;
+CREATE DATABASE FitnessTracker;
 
-CREATE TABLE user_id (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL UNIQUE,
+CREATE TABLE User (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL,
     current_weight DECIMAL(5,2) NOT NULL,
     goal_weight DECIMAL(5,2) NOT NULL,
-    height DECIMAL(5,2) NOT NULL,
+    height DECIMAL(5,2) NOT NULL
 );
 
-CREATE TABLE DIET (
+CREATE TABLE Diet (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     date DATE NOT NULL,
@@ -38,4 +37,16 @@ CREATE TABLE ExercisePlan (
 	PRIMARY KEY (plan_id),
 	FOREIGN KEY (user_id) REFERENCES User (user_id),
 	FOREIGN KEY (exercise_id) REFERENCES Exercise (exercise_id)
+);
+
+
+CREATE TABLE FoodItem (
+    food_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    calories INT,
+    protein DECIMAL(5,2),
+    fat DECIMAL(5,2),
+    carbs DECIMAL(5,2),
+    added_sugar DECIMAL(5,2),
+    servings INT
 );
