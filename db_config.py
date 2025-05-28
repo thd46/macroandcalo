@@ -2,6 +2,6 @@
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'Reda.2580',  # Replace with your real MySQL password
+    'password': '',  # Replace with your real MySQL password
     'database': 'FitnessTracker'
 }
