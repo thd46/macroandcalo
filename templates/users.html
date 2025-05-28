@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User List</title>
+</head>
+<body>
+    <h2>Registered Users</h2>
+    <ul>
+        {% for user in users %}
+            <li>{{ user[0] }} — {{ user[1] }} lbs → goal: {{ user[2] }} lbs</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

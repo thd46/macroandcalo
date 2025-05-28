@@ -10,20 +10,25 @@ except Exception as e:
     print(f"invalid file: {e}")
     exit()
 
+# Nutrients we want to extract
 target_nutrients = ["Energy", "Protein", "Total lipid (fat)", "Carbohydrate, by difference"]
 
+# Get matching nutrient IDs
 nutrient_ids = nutrient_df[nutrient_df["name"].isin(target_nutrients)][["id", "name"]]
 print("Target nutrient IDs found:\n", nutrient_ids)
 
+# Merge nutrients with food descriptions
 merged = food_nutrient_df.merge(nutrient_ids, left_on="nutrient_id", right_on="id")
 merged = merged.merge(food_df[["fdc_id", "description"]], on="fdc_id")
 
+# Pivot to get each nutrient as a column
 pivot = merged.pivot_table(
     index=["fdc_id", "description"],
     columns="name",
     values="amount"
 ).reset_index()
 
+# Rename columns to match your DB
 pivot = pivot.rename(columns={
     "Energy": "calories",
     "Protein": "protein",
@@ -31,9 +36,9 @@ pivot = pivot.rename(columns={
     "Carbohydrate, by difference": "carbs"
 })
 
-portion_clean = portion_df.groupby("fdc_id").first().reset_index()
-pivot = pivot.merge(portion_clean[["fdc_id", "portion_description", "gram_weight"]], on="fdc_id", how="left")
+trimmed = pivot[["description", "calories", "protein", "fat", "carbs"]]
 
-pivot.to_csv("FoodItems/masterScrapedFoodItems.csv", index=False)
+trimmed.to_csv("FoodItems/cleanFoodItems.csv", index=False)
 
-
+print("Finished writing FoodItems/cleanFoodItems.csv")
+print("Longest description length:", trimmed['description'].astype(str).str.len().max())
