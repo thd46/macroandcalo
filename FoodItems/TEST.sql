@@ -1,0 +1,34 @@
+DELETE FROM Diet;
+DELETE FROM FoodItem;
+
+SELECT * FROM Diet;
+SELECT * FROM fooditem;
+
+ALTER TABLE FoodItem MODIFY name VARCHAR(255);
+
+
+ALTER TABLE FoodItem MODIFY name VARCHAR(255);
+ALTER TABLE FoodItem MODIFY calories DECIMAL(7,2);
+ALTER TABLE FoodItem MODIFY carbs DECIMAL(7,2);
+ALTER TABLE FoodItem MODIFY protein DECIMAL(7,2);
+ALTER TABLE FoodItem MODIFY fat DECIMAL(7,2);
+
+
+SHOW COLUMNS FROM FoodItem Like 'name';
+
+USE FitnessTracker;
+
+SELECT * FROM FoodItem
+ORDER BY food_id DESC
+LIMIT 10;
+
+
+SELECT DATABASE();
+SHOW TABLES;
+
+SELECT COUNT(*) FROM FoodItem;
+
+SELECT * FROM fooditem
+LIMIT 10;
+
+SELECT * FROM fooditem WHERE name LIKE '%chicken%'
