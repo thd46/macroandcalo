@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head><title>Edit Meal</title></head>
+<body>
+    {% include 'nav.html' %}
+    <h1>Edit Logged Meal</h1>
+
+    <form method="POST">
+        <label>Meal Type:</label>
+        <select name="meal_type" required>
+            {% for option in ['breakfast', 'lunch', 'dinner', 'snack'] %}
+                <option value="{{ option }}" {% if meal[0] == option %}selected{% endif %}>{{ option.capitalize() }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label>Calories:</label>
+        <input type="number" name="calories" step="0.01" value="{{ meal[1] }}" required><br><br>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <p><a href="{{ url_for('meals_by_date', date=date) }}">← Cancel</a></p>
+</body>
+</html>

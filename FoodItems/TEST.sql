@@ -18,7 +18,7 @@ SHOW COLUMNS FROM FoodItem Like 'name';
 
 USE FitnessTracker;
 
-SELECT * FROM FoodItem
+SELECT * FROM USER;
 ORDER BY food_id DESC
 LIMIT 10;
 
@@ -32,3 +32,16 @@ SELECT * FROM fooditem
 LIMIT 10;
 
 SELECT * FROM fooditem WHERE name LIKE '%chicken%'
+
+SELECT * FROM Diet ORDER BY diet_id DESC LIMIT 10;
+
+
+DELETE FROM Diet;
+DELETE FROM User;
+
+DELETE FROM Diet;
+DELETE FROM ExercisePlan;
+DELETE FROM User;
+
+-- Optional: reset user_id counter
+ALTER TABLE User AUTO_INCREMENT = 1;

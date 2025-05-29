@@ -2,10 +2,8 @@ import pandas as pd
 import MySQLdb
 from db_config import db_config
 
-# Load the USDA food data
 df = pd.read_csv("FoodItems/cleanFoodItems.csv", quotechar='"', encoding='utf-8')
 
-# Replace all NaN values with proper defaults
 df.fillna({
     'description': '',
     'calories': 0,
@@ -14,7 +12,6 @@ df.fillna({
     'carbs': 0
 }, inplace=True)
 
-# Connect to MySQL
 conn = MySQLdb.connect(
     host=db_config['host'],
     user=db_config['user'],
@@ -23,7 +20,6 @@ conn = MySQLdb.connect(
 )
 cursor = conn.cursor()
 
-# Insert each food item into the FoodItem table
 for index, row in df.iterrows():
     try:
         name = str(row['description']).strip().replace('\n', ' ').replace('\r', '')[:255]
@@ -38,12 +34,11 @@ for index, row in df.iterrows():
             VALUES (%s, %s, %s, %s, %s, %s)
         """, (name, calories, protein, fat, carbs, servings))
 
-        # ✅ Success message (every 50 rows to avoid spam)
         if index % 50 == 0:
-            print(f"✅ Inserted row {index}: {name[:40]}...")
+            print(f"Inserted row {index}: {name[:40]}...")
 
     except Exception as e:
-        print(f"❌ Skipped row {index} due to error: {e}")
+        print(f"Skipped row {index} due to error: {e}")
 
 
 

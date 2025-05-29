@@ -1,0 +1,18 @@
+<nav style="padding: 10px; background-color: #f0f0f0;">
+    <a href="/search-food">Search Food</a>
+    <a href="/my-meals">My Meals</a>
+    <a href="/dashboard">Dashboard</a>
+
+    {% if 'user_id' not in session %}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+    {% else %}
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+    {% endif %}
+
+    {% if 'username' in session %}
+        <span style="margin-left: 10px;">Hello, {{ session.username }}!</span>
+    {% endif %}
+</nav>
+<hr>

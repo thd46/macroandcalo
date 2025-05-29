@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log Meal</title>
+</head>
+<body>
+    {% include 'nav.html' %}
+    <h1>Log "{{ food[0] }}"</h1>
+    <p>Calories: {{ food[1] }}</p>
+
+    <form method="POST">
+        <label>Meal Type:</label>
+        <select name="meal_type" required>
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="snack">Snack</option>
+        </select>
+        <input type="hidden" name="calories" value="{{ food[1] }}">
+        <button type="submit">Log Meal</button>
+    </form>
+</body>
+</html>

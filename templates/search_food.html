@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Food</title>
+</head>
+<body>
+    {% include 'nav.html' %}
+    <h1>Search Food</h1>
+
+    <form method="GET" action="/search-food">
+        <input type="text" name="q" placeholder="Search..." value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <h2>Results ({{ results|length }}):</h2>
+        <ul>
+        {% for row in results %}
+            <li>
+                <strong>{{ row[1] }}</strong> — {{ row[2] }} cal |
+                Protein: {{ row[3] }}g | Fat: {{ row[4] }}g | Carbs: {{ row[5] }}g
+                [<a href="/log-meal/{{ row[0] }}">Log</a>]
+            </li>
+        {% endfor %}
+        </ul>
+    {% elif query %}
+        <p>No results found for "{{ query }}"</p>
+    {% endif %}
+</body>
+</html>

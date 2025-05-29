@@ -10,25 +10,20 @@ except Exception as e:
     print(f"invalid file: {e}")
     exit()
 
-# Nutrients we want to extract
 target_nutrients = ["Energy", "Protein", "Total lipid (fat)", "Carbohydrate, by difference"]
 
-# Get matching nutrient IDs
 nutrient_ids = nutrient_df[nutrient_df["name"].isin(target_nutrients)][["id", "name"]]
 print("Target nutrient IDs found:\n", nutrient_ids)
 
-# Merge nutrients with food descriptions
 merged = food_nutrient_df.merge(nutrient_ids, left_on="nutrient_id", right_on="id")
 merged = merged.merge(food_df[["fdc_id", "description"]], on="fdc_id")
 
-# Pivot to get each nutrient as a column
 pivot = merged.pivot_table(
     index=["fdc_id", "description"],
     columns="name",
     values="amount"
 ).reset_index()
 
-# Rename columns to match your DB
 pivot = pivot.rename(columns={
     "Energy": "calories",
     "Protein": "protein",

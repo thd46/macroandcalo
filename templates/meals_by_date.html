@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meals on {{ date }}</title>
+</head>
+<body>
+    {% include 'nav.html' %}
+    <h1>Meals on {{ date }}</h1>
+
+    {% if meals %}
+        <table style="border: 1px solid black; border-collapse: collapse;">
+        <tr>
+            <th>Meal Type</th>
+            <th>Food</th>
+            <th>Calories</th>
+            <th>Action</th>
+
+        </tr>
+        {% for row in meals %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>
+            <form method="POST" action="/delete-meal/{{ row[0] }}?date={{ date }}">
+                <button type="submit">🗑 Delete</button>
+            </form>
+            <form method="GET" action="/edit-meal/{{ row[0] }}">
+                <input type="hidden" name="date" value="{{ date }}">
+                <button type="submit">Edit</button>
+            </form>
+        </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>No meals logged on {{ date }}</p>
+    {% endif %}
+
+    <p><a href="/dashboard">← Back to Dashboard</a></p>
+</body>
+</html>

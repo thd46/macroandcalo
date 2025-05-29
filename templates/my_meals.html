@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Meals</title>
+</head>
+<body>
+    {% include 'nav.html' %}
+    <h1>Logged Meals</h1>
+    <h2>Total Calories: {{ total }}</h2>
+
+    {% if meals %}
+        <table style="border: 1px solid black; border-collapse: collapse;">
+            <tr>
+                <th>Date</th>
+                <th>Meal Type</th>
+                <th>Food</th>
+                <th>Calories</th>
+            </tr>
+            {% for meal in meals %}
+                <tr>
+                    <td>{{ meal[0] }}</td>
+                    <td>{{ meal[1] }}</td>
+                    <td>{{ meal[2] }}</td>
+                    <td>{{ meal[3] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No meals logged yet.</p>
+    {% endif %}
+</body>
+</html>
