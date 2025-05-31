@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Exercise Plans</title>
+    <style>
+        .delete-btn {
+            background: none;
+            border: none;
+            color: red;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            color: darkred;
+        }
+    </style>
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <h2>My Exercise Plans</h2>
+
+    {% if plans %}
+        {% for plan_name, exercises in plans.items() %}
+            <h3>{{ plan_name }} (until {{ plan_timeframes[plan_name] }})</h3>
+            <table border="1" cellpadding="6" cellspacing="0">
+                <tr>
+                    <th>Exercise</th>
+                    <th>Sets</th>
+                    <th>Reps</th>
+                    <th>Muscle Group</th>
+                    <th>Type</th>
+                    <th></th> <!-- for delete icon -->
+                </tr>
+                {% for ex in exercises %}
+                    <tr>
+                        <td>{{ ex[0] }}</td>
+                        <td>{{ ex[1] }}</td>
+                        <td>{{ ex[2] }}</td>
+                        <td>{{ ex[3] }}</td>
+                        <td>{{ ex[4] }}</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('delete_exercise_from_plan') }}" style="display:inline;">
+                                <input type="hidden" name="exercise_id" value="{{ ex[5] }}">
+                                <input type="hidden" name="plan_name" value="{{ plan_name }}">
+                                <button type="submit" class="delete-btn" title="Remove from plan">&times;</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>You have no exercise plans yet.</p>
+    {% endif %}
+</body>
+</html>
+

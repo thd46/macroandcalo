@@ -15,7 +15,7 @@ CREATE TABLE User (
 
 CREATE TABLE Exercise (
 	exercise_id	INTEGER NOT NULL AUTO_INCREMENT, 	-- primary key
-	name		VARCHAR(30),				-- name of exercise
+	name		VARCHAR(255),				-- name of exercise
 	sets		INTEGER,				-- number of sets
 	reps		INTEGER,				-- number of reps
 	muscle_group	VARCHAR(40),				-- targeted muscle group(s)
@@ -27,7 +27,7 @@ CREATE TABLE ExercisePlan (
 	plan_id		INTEGER NOT NULL AUTO_INCREMENT,	-- primary key of the plan
 	user_id		INTEGER NOT NULL,			-- foreign key
 	exercise_id	INTEGER NOT NULL,			-- foreign key
-	time_frame	DATE,					-- date of the end of the plan
+	plan_name   VARCHAR(50),  				-- name for grouping/naming plans
 	PRIMARY KEY (plan_id),
 	FOREIGN KEY (user_id) REFERENCES User (user_id),
 	FOREIGN KEY (exercise_id) REFERENCES Exercise (exercise_id)
@@ -35,12 +35,12 @@ CREATE TABLE ExercisePlan (
 
 CREATE TABLE FoodItem (
     food_id INTEGER NOT NULL AUTO_INCREMENT,
-    name VARCHAR(100) NOT NULL,
-    calories INTEGER,
-    protein DECIMAL(5,2),
-    fat DECIMAL(5,2),
-    carbs DECIMAL(5,2),
-    added_sugar DECIMAL(5,2),
+    name VARCHAR(255) NOT NULL,
+    calories DECIMAL(7,2),
+    protein DECIMAL(6,2),
+    fat DECIMAL(6,2),
+    carbs DECIMAL(6,2),
+    added_sugar DECIMAL(6,2),
     servings INTEGER,
     PRIMARY KEY (food_id)
 );

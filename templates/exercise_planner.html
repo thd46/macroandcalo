@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create or Modify a Plan</title>
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <h2>Create or Modify a Plan</h2>
+
+    <form method="POST">
+        <label>Plan Name:</label><br>
+        <input type="text" name="plan_name" required><br><br>
+
+        <label>Select Exercises:</label><br>
+        <div style="max-height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
+            {% for exercise in exercises %}
+                <input type="checkbox" name="exercises" value="{{ exercise[0] }}"> {{ exercise[1] }}<br>
+            {% endfor %}
+        </div>
+
+        <br>
+        <input type="submit" value="Add">
+    </form>
+</body>
+</html>
+

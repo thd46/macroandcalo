@@ -289,7 +289,86 @@ def profile():
 
     return render_template('profile.html', profile=profile, bmi=bmi, category=category)
 
+@app.route('/create-exercise-plan', methods=['GET', 'POST'])
+def create_exercise_plan():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
 
+    cur = mysql.connection.cursor()
+
+    if request.method == 'POST':
+        plan_name = request.form['plan_name']
+        selected_exercises = request.form.getlist('exercises')
+        user_id = session['user_id']
+
+        for exercise_id in selected_exercises:
+            cur.execute("""
+                INSERT INTO ExercisePlan (user_id, exercise_id, plan_name)
+                VALUES (%s, %s, %s)     
+            """, (user_id, exercise_id, plan_name))
+
+        mysql.connection.commit()
+        cur.close()
+        return redirect(url_for('exercise_plans'))
+
+    # GET: show all exercises to choose from
+    cur.execute("SELECT exercise_id, name FROM Exercise ORDER BY name")
+    exercises = cur.fetchall()
+    cur.close()
+
+    return render_template('exercise_planner.html', exercises=exercises)
+
+@app.route('/exercise-plans')
+def exercise_plans():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+    cur = mysql.connection.cursor()
+
+    # Get all exercises grouped by plan name
+    cur.execute("""
+        SELECT ep.plan_name, e.name, e.sets, e.reps, e.muscle_group, e.type, e.exercise_id
+        FROM ExercisePlan ep
+        JOIN Exercise e ON ep.exercise_id = e.exercise_id
+        WHERE ep.user_id = %s
+        ORDER BY ep.plan_name, e.name
+    """, (user_id,))
+
+
+    rows = cur.fetchall()
+    cur.close()
+
+    # Group exercises by plan name
+    from collections import defaultdict
+    plans = defaultdict(list)
+    plan_timeframes = {}
+
+    for row in rows:
+        plan_name, name, sets, reps, muscle_group, ex_type, exercise_id = row
+        plans[plan_name].append((name, sets, reps, muscle_group, ex_type, exercise_id))
+
+    return render_template('exercise_plans.html', plans=plans, plan_timeframes=plan_timeframes)
+
+@app.route('/delete-exercise-from-plan', methods=['POST'])
+def delete_exercise_from_plan():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+    exercise_id = request.form['exercise_id']
+    plan_name = request.form['plan_name']
+
+    cur = mysql.connection.cursor()
+    cur.execute("""
+        DELETE FROM ExercisePlan
+        WHERE user_id = %s AND exercise_id = %s AND plan_name = %s
+        LIMIT 1
+    """, (user_id, exercise_id, plan_name))
+    mysql.connection.commit()
+    cur.close()
+
+    return redirect(url_for('exercise_plans'))
 
 
 if __name__ == '__main__':

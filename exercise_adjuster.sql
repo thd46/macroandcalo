@@ -1,0 +1,1 @@
+ALTER TABLE ExercisePlan ADD COLUMN plan_name VARCHAR(50);

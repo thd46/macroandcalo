@@ -21,19 +21,28 @@ This system forms the backend foundation for a potential web or mobile applicati
 - Has a working /users route that pulls user data from MySQL
 
 1. Clone the repo and open it in VS Code
+
 2. Run:
    python -m venv venv
    venv\Scripts\activate
    pip install -r requirements.txt
 
 3. Set up MySQL and run the schema to create all tables
+
+      mysql -u root -p < CREATE_DATABASE.sql
+
 4. Edit db_config.py with your MySQL password
+
 5. Run the scraper:
    python FoodItems/USDA-scraper.py
-6. Import the cleaned CSV:
+
+6. Import the cleaned CSVs (Exercises and Foods):
    python import_to_db.py
+
 7. Start the app:
    python app.py
+
+**NOTE THE FOLLOWING** 
 - You only need to run the import once (it’s slow)
 - cleanFoodItems.csv is already prepared after running the scraper
 - Don’t forget to activate your venv every time
