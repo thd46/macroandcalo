@@ -1,6 +1,6 @@
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'Pr@mukh123!',  
+    'password': 'password',  
     'database': 'FitnessTracker'
 }
