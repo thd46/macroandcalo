@@ -127,3 +127,5 @@ python3 app.py
 - You only need to run the import once (it’s slow)
 - cleanFoodItems.csv is already prepared after running the scraper
 - Don’t forget to activate your venv every time
+- If you are running into issues with importing certain modules in the virtual environment (typically pandas or numpy), you can run import_to_db.py on your local
+environment with those modules installed. Just make sure to start up the virtual environment when running the application
