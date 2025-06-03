@@ -71,35 +71,29 @@ After completing the above, your 'FoodItems/USDA Food Data/' should contain the 
 
 ---
 
-#### **3. Create and activate a virtual environment**
+#### **3. Install requirements**
+
+pip install -r requirements.txt
+
+#### **4. Set up the MySQL database**
+
+mysql -u root -p < CREATE_DATABASE.sql
+
+#### **5. Edit db_config.py with your MySQL password**
+
+#### **6. Run the scraper to populate all the necessary files:**
 
 - **Windows:**
 ```bash
-python -m venv venv
-venv\Scripts\activate
+python FoodItems/USDA-scraper.py
 ```
 
 - **Mac/Linux:**
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+python3 FoodItems/USDA-scraper.py
 ```
 
-#### **4. Install requirements**
-
-pip install -r requirements.txt
-
-#### **5. Set up the MySQL database**
-
-mysql -u root -p < CREATE_DATABASE.sql
-
-#### **6. Edit db_config.py with your MySQL password**
-
-#### **7. Run the scraper to populate all the necessary files:**
-
-python FoodItems/USDA-scraper.py
-
-#### **8. Run import_to_db.py - this will import our Exercise and Food Data into the DB we just created:**
+#### **7. Run import_to_db.py - this will import our Exercise and Food Data into the DB we just created:**
 
 - **Windows:**
 ```bash
@@ -111,7 +105,7 @@ python import_to_db.py
 python3 import_to_db.py
 ```
 
-#### **9. Start the App:**
+#### **8. Start the App:**
 
 - **Windows:**
 ```bash
