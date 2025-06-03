@@ -114,7 +114,7 @@ python app.py
 
 - **Mac/Linux:**
 ```bash
-python3 app.py
+l
 ```
 
 **NOTE THE FOLLOWING** 
