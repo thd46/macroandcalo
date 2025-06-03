@@ -1,10 +1,10 @@
 import pandas as pd
 
 try:
-    food_df = pd.read_csv("FoodItems/USDA Food Data/food-main.csv", low_memory=False)
-    food_nutrient_df = pd.read_csv("FoodItems/USDA Food Data/food_nutrient-main.csv", low_memory=False)
-    nutrient_df = pd.read_csv("FoodItems/USDA Food Data/nutrient-main.csv", low_memory=False)
-    portion_df = pd.read_csv("FoodItems/USDA Food Data/food_portion-main.csv", low_memory=False)
+    food_df = pd.read_csv("FoodItems/USDA Food Data/food.csv", low_memory=False)
+    food_nutrient_df = pd.read_csv("FoodItems/USDA Food Data/food_nutrient.csv", low_memory=False)
+    nutrient_df = pd.read_csv("FoodItems/USDA Food Data/nutrient.csv", low_memory=False)
+    portion_df = pd.read_csv("FoodItems/USDA Food Data/food_portion.csv", low_memory=False)
     print("All CSVs loaded successfully.")
 except Exception as e:
     print(f"invalid file: {e}")

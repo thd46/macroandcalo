@@ -20,32 +20,110 @@ This system forms the backend foundation for a potential web or mobile applicati
 - Imports over 1.8 million food items
 - Has a working /users route that pulls user data from MySQL
 
-1. Clone the repo and open it in VS Code
+## 🚀 Project Setup Instructions
 
-2. Run:
-   python -m venv venv
-   venv\Scripts\activate
-   pip install -r requirements.txt
+### Prerequisites
 
-3. Set up MySQL and run the schema to create all tables
+Make sure you have the following installed:
 
-      mysql -u root -p < CREATE_DATABASE.sql
+- [Python 3.8+](https://www.python.org/downloads/)
+- [pip](https://pip.pypa.io/en/stable/installation/)
+- [MySQL Server](https://dev.mysql.com/downloads/mysql/)
+- [VS Code](https://code.visualstudio.com/) *(optional but recommended)*
 
-4. Edit db_config.py with your MySQL password
+---
 
-5. Run the scraper:
-   python FoodItems/USDA-scraper.py
+### 🛠 Setup Steps
 
-6. Import the cleaned CSVs (Exercises and Foods):
-   python import_to_db.py
+#### **1. Get the project files**
 
-7. Start the app:
-   python app.py
+**Option A: ZIP Download**
+- If you received a ZIP (e.g. from BBLearn), extract the contents.
+- Open the folder in VS Code or another editor.
+
+**Option B: Clone from GitHub**
+```bash
+git clone https://github.com/thd46/macroandcalo.git
+cd macroandcalo
+```
+---
+
+#### **2. Download USDA Food Data**
+
+TSome of the USDA dataset is too large to include in the repo. You’ll need to download it manually:
+
+1. Visit: https://fdc.nal.usda.gov/download-datasets.html  
+2. Download the dataset "Full Download of All Data Types":
+
+> ![Example dataset image](readme-images/foodDataSource.png)
+
+3. Extract and place the following files into 'FoodItems/USDA Food Data/' :
+
+Files to move:
+- `food.csv` -> ~ 1.77 gb
+- `food_nutrient.csv` -> ~ 215 mb
+
+After completing the above, your 'FoodItems/USDA Food Data/' should contain the following:
+- `food.csv`
+- `nutrient.csv`
+- `food_portion.csv`
+- `food_nutrient.csv`
+
+---
+
+#### **3. Create and activate a virtual environment**
+
+- **Windows:**
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+- **Mac/Linux:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+#### **4. Install requirements**
+
+pip install -r requirements.txt
+
+#### **5. Set up the MySQL database**
+
+mysql -u root -p < CREATE_DATABASE.sql
+
+#### **6. Edit db_config.py with your MySQL password**
+
+#### **7. Run the scraper to populate all the necessary files:**
+
+python FoodItems/USDA-scraper.py
+
+#### **8. Run import_to_db.py - this will import our Exercise and Food Data into the DB we just created:**
+
+- **Windows:**
+```bash
+python import_to_db.py
+```
+
+- **Mac/Linux:**
+```bash
+python3 import_to_db.py
+```
+
+#### **9. Start the App:**
+
+- **Windows:**
+```bash
+python app.py
+```
+
+- **Mac/Linux:**
+```bash
+python3 app.py
+```
 
 **NOTE THE FOLLOWING** 
 - You only need to run the import once (it’s slow)
 - cleanFoodItems.csv is already prepared after running the scraper
 - Don’t forget to activate your venv every time
-
-
-BTW MAKE SURE YOU RUN THE QUERIES IN TEST.SQL, THIS WILL EXPAND THE VALUES.
