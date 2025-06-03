@@ -71,8 +71,8 @@ def log_meal(food_id):
         cur = mysql.connection.cursor()
         cur.execute("""
             INSERT INTO Diet (user_id, date, meal_type, food_id, calories)
-            VALUES (%s, %s, %s, %s, %s)
-        """, (user_id, date, meal_type, food_id, calories))
+            VALUES (%s, CURRENT_DATE, %s, %s, %s)
+        """, (user_id, meal_type, food_id, calories))
         mysql.connection.commit()
         cur.close()
 
