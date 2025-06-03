@@ -127,8 +127,16 @@ python3 app.py
 - You only need to run the import once (it’s slow)
 - cleanFoodItems.csv is already prepared after running the scraper
 - Don’t forget to activate your venv every time
+
+**POSSIBLE TROUBLESHOOTING**
 - If you are running into issues with importing certain modules in the virtual environment (typically pandas or numpy), you can run import_to_db.py on your local
 environment with those modules installed. Just make sure to start up the virtual environment when running the application
+- If the virtual environment is not being set up properly from the command line, you can do the following instead in VSCode:
+    - Press Control + Shift + P (Command + Shift + P on mac)
+    - Click "Select Python Interpreter"
+    - Click "Create Virtual Environment" (first option)
+    - Select requirements.txt for the dependencies
+    - Hit OK, and you should be good from there
 
 **Sources** 
 - The food data sourced from the USDA website: https://fdc.nal.usda.gov/download-datasets.html 
