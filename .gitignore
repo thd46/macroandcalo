@@ -1,3 +1,0 @@
-# Ignore large USDA files
-FoodItems/USDA Food Data/
-FoodItems/*.csv
